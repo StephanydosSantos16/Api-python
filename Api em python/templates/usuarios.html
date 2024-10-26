@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Usuários</title>
+</head>
+<body>
+    <header>
+        <h1>Usuários</h1>
+    </header>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+        <form method="POST">
+            <input type="text" name="username" placeholder="Nome de usuário" required>
+            <input type="password" name="password" placeholder="Senha" required>
+            <input type="submit" value="Adicionar Usuário">
+        </form>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome de Usuário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.username }}</td>
+                    <td>
+                        <a href="{{ url_for('editar_usuario', id=usuario.id) }}">Editar</a>
+                        <form action="{{ url_for('deletar_usuario', id=usuario.id) }}" method="POST" style="display:inline;">
+                            <input type="submit" value="Deletar">
+                        </form>
+                        <a href="{{ url_for('selecionar_usuario', id=usuario.id) }}">Selecionar</a>
+                        <a href="{{ url_for('alterar_senha', id=usuario.id) }}">Alterar Senha</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

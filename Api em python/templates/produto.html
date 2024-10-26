@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Produto</title>
+</head>
+<body>
+    <header>
+        <h1>Detalhes do Produto</h1>
+    </header>
+    <div class="container">
+        <h2>{{ produto.nome }}</h2>
+        <p><strong>Descrição:</strong> {{ produto.descricao }}</p>
+        <p><strong>Preço:</strong> R$ {{ produto.preco }}</p>
+        <a href="{{ url_for('produtos') }}">Voltar</a>
+    </div>
+</body>
+</html>
